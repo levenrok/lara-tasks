@@ -26,7 +26,7 @@ class TaskFactory extends Factory
 
     public function completed(): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'completed' => true,
         ]);
     }
