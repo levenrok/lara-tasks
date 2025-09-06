@@ -12,8 +12,9 @@ class TaskSeeder extends Seeder
      */
     public function run(): void
     {
-        Task::factory(10)->create();
+        $user = \App\Models\User::first();
+        Task::factory(5)->for($user)->create();
 
-        Task::factory(10)->completed()->create();
+        Task::factory(5)->completed()->create();
     }
 }
