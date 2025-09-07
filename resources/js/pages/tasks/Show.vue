@@ -2,7 +2,12 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import { tasks } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
+import { Task } from '@/types/task';
 import { Head } from '@inertiajs/vue3';
+
+defineProps<{
+    user_task: Task;
+}>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -10,10 +15,6 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: tasks().url,
     },
 ];
-
-defineProps({
-    user_task: Object,
-});
 </script>
 
 <template>

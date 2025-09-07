@@ -2,8 +2,13 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import { tasks } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
+import { Task } from '@/types/task';
 import { Head, Link } from '@inertiajs/vue3';
 import { Loader2 } from 'lucide-vue-next';
+
+defineProps<{
+    user_tasks: Task[];
+}>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -11,10 +16,6 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: tasks().url,
     },
 ];
-
-defineProps({
-    user_tasks: Array,
-});
 </script>
 
 <template>
