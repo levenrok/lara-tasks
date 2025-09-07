@@ -16,7 +16,7 @@ Route::get('/tasks', function () {
     $user = User::with('tasks')->find(auth()->id());
     $user_tasks = $user->tasks;
 
-    return Inertia::render('Tasks', [
+    return Inertia::render('tasks/Index', [
         'user_tasks' => $user_tasks,
     ]);
 })->middleware(['auth', 'verified'])->name('tasks');
@@ -25,7 +25,7 @@ Route::get('/tasks/{id}', function ($id) {
     $user = User::with('tasks')->find(auth()->id());
     $user_task = $user->tasks()->find($id);
 
-    return Inertia::render('Task', [
+    return Inertia::render('tasks/Show', [
         'user_task' => $user_task,
     ]);
 })->middleware(['auth', 'verified'])->name('task');

@@ -20,23 +20,23 @@ defineProps({
     <Head title="Tasks" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="p-4 flex flex-col space-y-4">
-            <div class="p-2 rounded-md border">
+        <div class="flex flex-col space-y-4 p-4">
+            <div class="rounded-md border p-2">
                 <h2 class="text-2xl">Name</h2>
                 <p>{{ user_task.name }}</p>
             </div>
-            <div class="p-2 rounded-md border">
+            <div class="rounded-md border p-2">
                 <h2 class="text-2xl">Description</h2>
                 <p>{{ user_task.description }}</p>
             </div>
-            <div class="p-2 rounded-md border">
+            <div class="rounded-md border p-2">
                 <h2 class="text-2xl">Date</h2>
                 <p>{{ user_task.date }}</p>
             </div>
-            <div class="p-2 rounded-md border">
+            <div class="rounded-md border p-2">
                 <h2 class="text-2xl">Completed</h2>
-                <p :class="{'text-green-500 text-bold underline': user_task.completed}">Complete</p>
-                <p :class="{'text-red-500 text-bold underline': !user_task.completed}">Not Complete</p>
+                <p :class="{ 'text-bold text-green-500 underline': user_task.completed }">Complete</p>
+                <p :class="{ 'text-bold text-red-500 underline': !user_task.completed }">Not Complete</p>
             </div>
         </div>
     </AppLayout>
