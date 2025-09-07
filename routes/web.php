@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -12,7 +13,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/tasks', function () {
-    $user_tasks = auth()->user()->tasks()->get();
+    $user = User::with('tasks')->find(auth()->id());
+    $user_tasks = $user->tasks;
 
     return Inertia::render('Tasks', [
         'user_tasks' => $user_tasks,
@@ -20,7 +22,8 @@ Route::get('/tasks', function () {
 })->middleware(['auth', 'verified'])->name('tasks');
 
 Route::get('/tasks/{id}', function ($id) {
-    $user_task = auth()->user()->tasks()->find($id);
+    $user = User::with('tasks')->find(auth()->id());
+    $user_task = $user->tasks()->find($id);
 
     return Inertia::render('Task', [
         'user_task' => $user_task,
