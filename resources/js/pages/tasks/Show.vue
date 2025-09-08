@@ -1,26 +1,17 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { tasks } from '@/routes';
-import { type BreadcrumbItem } from '@/types';
 import { Task } from '@/types/task';
 import { Head } from '@inertiajs/vue3';
 
 defineProps<{
     user_task: Task;
 }>();
-
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Tasks',
-        href: tasks().url,
-    },
-];
 </script>
 
 <template>
     <Head title="Tasks" />
 
-    <AppLayout :breadcrumbs="breadcrumbs">
+    <AppLayout>
         <div class="flex flex-col space-y-4 p-4">
             <div class="rounded-md border p-2">
                 <h2 class="text-2xl">Name</h2>
