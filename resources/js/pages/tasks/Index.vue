@@ -5,7 +5,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import { Loader2, PlusCircle } from 'lucide-vue-next';
 
 defineProps<{
-    user_tasks: Task[];
+    tasks: Task[];
 }>();
 </script>
 
@@ -32,12 +32,7 @@ defineProps<{
             </Link>
         </div>
         <div class="space-y-4 p-2">
-            <Link
-                :href="`/tasks/${task.id}`"
-                class="block rounded-lg border border-gray-200 px-4 py-6"
-                v-for="task in user_tasks"
-                v-bind:key="task.id"
-            >
+            <Link :href="`/tasks/${task.id}`" class="block rounded-lg border border-gray-200 px-4 py-6" v-for="task in tasks" v-bind:key="task.id">
                 <div class="text-sm font-bold text-blue-500">{{ task.date }}</div>
                 <div class="flex flex-row space-x-2">
                     <div>

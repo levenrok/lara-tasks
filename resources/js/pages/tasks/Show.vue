@@ -4,7 +4,7 @@ import { Task } from '@/types/task';
 import { Head } from '@inertiajs/vue3';
 
 defineProps<{
-    user_task: Task;
+    task: Task;
 }>();
 </script>
 
@@ -15,20 +15,20 @@ defineProps<{
         <div class="flex flex-col space-y-4 p-4">
             <div class="rounded-md border p-2">
                 <h2 class="text-2xl">Name</h2>
-                <p>{{ user_task.name }}</p>
+                <p>{{ task.name }}</p>
             </div>
             <div class="rounded-md border p-2">
                 <h2 class="text-2xl">Description</h2>
-                <p>{{ user_task.description }}</p>
+                <p>{{ task.description }}</p>
             </div>
             <div class="rounded-md border p-2">
                 <h2 class="text-2xl">Date</h2>
-                <p>{{ user_task.date }}</p>
+                <p>{{ task.date }}</p>
             </div>
             <div class="rounded-md border p-2">
                 <h2 class="text-2xl">Completed</h2>
-                <p :class="{ 'text-bold text-green-500 underline': user_task.completed }">Complete</p>
-                <p :class="{ 'text-bold text-red-500 underline': !user_task.completed }">Not Complete</p>
+                <p :class="{ 'text-bold text-green-500 underline': task.completed }">Complete</p>
+                <p :class="{ 'text-bold text-red-500 underline': !task.completed }">Not Complete</p>
             </div>
         </div>
     </AppLayout>
