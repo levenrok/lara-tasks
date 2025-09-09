@@ -13,7 +13,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('tasks', TaskController::class, [
-    'except' => ['edit', 'update', 'destroy'],
+    'except' => ['edit', 'update'],
 ])->middleware(['auth', 'verified'])->names(['index' => 'tasks']);
 
 require __DIR__.'/settings.php';
