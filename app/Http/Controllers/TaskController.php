@@ -68,7 +68,9 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        return Inertia::render('tasks/Edit', [
+            'task' => $task,
+        ]);
     }
 
     /**
@@ -76,7 +78,21 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'min:3'],
+            'description' => ['max:255'],
+            'date' => ['date'],
+            'completed' => ['boolean'],
+        ]);
+
+        $task->update([
+            'name' => $request['name'],
+            'description' => $request['description'],
+            'date' => $request['date'],
+            'completed' => $request['completed'],
+        ]);
+
+        return to_route('tasks.show', $task->id);
     }
 
     /**
