@@ -36,12 +36,6 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        $request->validate([
-            'name' => ['required', 'min:3'],
-            'description' => ['max:255'],
-            'date' => ['date'],
-        ]);
-
         Task::create([
             'name' => $request['name'],
             'description' => $request['description'],
@@ -78,13 +72,6 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        $request->validate([
-            'name' => ['required', 'min:3'],
-            'description' => ['max:255'],
-            'date' => ['date'],
-            'completed' => ['boolean'],
-        ]);
-
         $task->update([
             'name' => $request['name'],
             'description' => $request['description'],
