@@ -44,6 +44,14 @@ jobs:
       - name: Copy Environment File
         run: cp .env.example .env
 
+      - name: Ensure SQLite Database Exists
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+
+      - name: Run Migrations
+        run: php artisan migrate --no-interaction --force
+
       - name: Generate Application Key
         run: php artisan key:generate
 
