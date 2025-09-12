@@ -33,3 +33,14 @@ test('show page is rendered', function () {
 
     $response->assertStatus(200);
 });
+
+test('edit page is rendered', function () {
+    $user = User::factory()->create();
+    $task = Task::factory()->create(['user_id' => $user->id]);
+
+    $response = $this
+        ->actingAs($user)
+        ->get(route('tasks.edit', $task->id));
+
+    $response->assertStatus(200);
+});
