@@ -15,6 +15,7 @@ const form = useForm({
     description: props.task.description,
     date: props.task.date,
     completed: !!props.task.completed,
+    updateStatusOnly: false,
 });
 </script>
 
@@ -103,7 +104,7 @@ const form = useForm({
             </div>
 
             <div class="mt-6 flex items-center justify-end gap-x-6">
-                <Link :href="`/tasks/${task.id}`" class="text-sm/6 font-semibold text-gray-900 dark:text-white">Cancel</Link>
+                <Link :href="`/tasks/${task.id}`" class="text-sm/6 font-semibold text-gray-900 dark:text-white">Cancel </Link>
                 <button
                     type="submit"
                     :disabled="form.processing"

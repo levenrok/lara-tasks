@@ -1,12 +1,27 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Task } from '@/types/task';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, useForm } from '@inertiajs/vue3';
 import { Loader2, PlusCircle } from 'lucide-vue-next';
 
 defineProps<{
     tasks: Task[];
 }>();
+
+function updateCompleted(task: Task, value: boolean) {
+    useForm({ ...task, completed: value, updateStatusOnly: true }).patch(`/tasks/${task.id}`, {
+        preserveState: false,
+        preserveScroll: true,
+        only: ['tasks'],
+        onSuccess: () => {
+            task.completed = value;
+            alert('Task updated sucessfully!');
+        },
+        onError: (errors) => {
+            alert(`Failed to update task: ${errors}`);
+        },
+    });
+}
 </script>
 
 <template>
@@ -32,11 +47,17 @@ defineProps<{
             </Link>
         </div>
         <div class="space-y-4 p-2">
-            <Link :href="`/tasks/${task.id}`" class="block rounded-lg border border-gray-200 px-4 py-6" v-for="task in tasks" v-bind:key="task.id">
+            <Link :href="`/tasks/${task.id}`" class="block rounded-lg border border-gray-200 px-4 py-6" v-for="task in tasks" :key="task.id">
                 <div class="text-sm font-bold text-blue-500">{{ task.date }}</div>
                 <div class="flex flex-row space-x-2">
                     <div>
-                        <input type="checkbox" :id="`task-${task.id}`" :checked="task.completed" />
+                        <input
+                            type="checkbox"
+                            :id="`task-${task.id}`"
+                            :checked="task.completed"
+                            @change="updateCompleted(task, ($event.target as HTMLInputElement).checked)"
+                            @click.stop
+                        />
                     </div>
                     <div>
                         <strong>{{ task.name }}</strong>

@@ -79,7 +79,11 @@ class TaskController extends Controller
             'completed' => $request['completed'],
         ]);
 
-        return to_route('tasks.show', $task->id);
+        // Route to the task info page only if the 'updateStatusOnly' prop is false
+        // This prop is set to true in the index page form because routing is not needed
+        if (! $request['updateStatusOnly']) {
+            return to_route('tasks.show', $task->id);
+        }
     }
 
     /**
