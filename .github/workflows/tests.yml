@@ -45,9 +45,7 @@ jobs:
         run: cp .env.example .env
 
       - name: Ensure SQLite Database Exists
-        run: |
-          mkdir -p database
-          touch database/database.sqlite
+        run: touch database/database.sqlite
 
       - name: Run Migrations
         run: php artisan migrate --no-interaction --force
@@ -57,6 +55,9 @@ jobs:
 
       - name: Build Assets
         run: npm run build
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
 
       - name: Tests (Shard ${{ matrix.shard }}/4)
         run: ./vendor/bin/pest --parallel --shard ${{ matrix.shard }}/4
