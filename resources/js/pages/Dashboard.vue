@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import AppLayout from '@/layouts/AppLayout.vue';
+import { updateCompleted } from '@/lib/utils';
 import { Task } from '@/types/task';
 import { Head } from '@inertiajs/vue3';
 
@@ -35,7 +36,13 @@ defineProps<{
                         {{ task.date }}
                     </TableCell>
                     <TableCell class="text-center">
-                        <input type="checkbox" :id="`task-${task.id}`" :checked="task.completed" />
+                        <input
+                            type="checkbox"
+                            :id="`task-${task.id}`"
+                            :checked="task.completed"
+                            @change="updateCompleted(task, ($event.target as HTMLInputElement).checked)"
+                            @click.stop
+                        />
                     </TableCell>
                 </TableRow>
             </TableBody>

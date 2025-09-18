@@ -1,27 +1,13 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
+import { updateCompleted } from '@/lib/utils';
 import { Task } from '@/types/task';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import { Loader2, PlusCircle } from 'lucide-vue-next';
 
 defineProps<{
     tasks: Task[];
 }>();
-
-function updateCompleted(task: Task, value: boolean) {
-    useForm({ ...task, completed: value, updateStatusOnly: true }).patch(`/tasks/${task.id}`, {
-        preserveState: false,
-        preserveScroll: true,
-        only: ['tasks'],
-        onSuccess: () => {
-            task.completed = value;
-            alert('Task updated sucessfully!');
-        },
-        onError: (errors) => {
-            alert(`Failed to update task: ${errors}`);
-        },
-    });
-}
 </script>
 
 <template>

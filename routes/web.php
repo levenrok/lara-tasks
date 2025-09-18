@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TaskController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -9,7 +10,12 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $user = User::with('tasks')->find(auth()->id());
+    $tasks = $user->tasks()->latest()->get();
+
+    return Inertia::render('Dashboard', [
+        'tasks' => $tasks,
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('tasks', TaskController::class)->middleware(['auth', 'verified'])->names(['index' => 'tasks']);
