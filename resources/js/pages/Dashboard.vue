@@ -1,36 +1,44 @@
 <script setup lang="ts">
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { dashboard } from '@/routes';
-import { type BreadcrumbItem } from '@/types';
+import { Task } from '@/types/task';
 import { Head } from '@inertiajs/vue3';
 
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard().url,
-    },
-];
+defineProps<{
+    tasks: Task[];
+}>();
 </script>
 
 <template>
     <Head title="Dashboard" />
 
-    <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-            <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                    <PlaceholderPattern />
-                </div>
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                    <PlaceholderPattern />
-                </div>
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                    <PlaceholderPattern />
-                </div>
-            </div>
-            <div class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border">
-                <PlaceholderPattern />
-            </div>
-        </div>
+    <AppLayout>
+        <Table>
+            <TableCaption>A list of your tasks.</TableCaption>
+            <TableHeader>
+                <TableRow>
+                    <TableHead class="w-[100px]"> Name </TableHead>
+                    <TableHead class="hidden sm:table-cell">Description</TableHead>
+                    <TableHead class="hidden sm:table-cell">Date</TableHead>
+                    <TableHead class="text-center"> Completed </TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                <TableRow v-for="task in tasks" :key="task.id">
+                    <TableCell class="font-medium">
+                        {{ task.name }}
+                    </TableCell>
+                    <TableCell class="hidden max-w-[400px] whitespace-normal sm:table-cell">
+                        {{ task.description }}
+                    </TableCell>
+                    <TableCell class="hidden sm:table-cell">
+                        {{ task.date }}
+                    </TableCell>
+                    <TableCell class="text-center">
+                        <input type="checkbox" :id="`task-${task.id}`" :checked="task.completed" />
+                    </TableCell>
+                </TableRow>
+            </TableBody>
+        </Table>
     </AppLayout>
 </template>
