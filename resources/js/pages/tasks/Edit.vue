@@ -23,7 +23,7 @@ const form = useForm({
     <Head title="Edit Task" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <form @submit.prevent="form.patch(`/tasks/${task.id}`)">
+        <form class="p-4" @submit.prevent="form.patch(`/tasks/${task.id}`)">
             <div class="space-y-12">
                 <div class="border-b border-gray-900/10 py-4 dark:border-white/10">
                     <h2 class="text-base/7 font-semibold text-gray-900 dark:text-white">Edit Task</h2>

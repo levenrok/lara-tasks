@@ -16,7 +16,7 @@ const form = useForm({
     <Head title="Create Task" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <form @submit.prevent="form.post('/tasks')">
+        <form class="p-4" @submit.prevent="form.post('/tasks')">
             <div class="space-y-12">
                 <div class="border-b border-gray-900/10 py-4 dark:border-white/10">
                     <h2 class="text-base/7 font-semibold text-gray-900 dark:text-white">Create a Task</h2>
