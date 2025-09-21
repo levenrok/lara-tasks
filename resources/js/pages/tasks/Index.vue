@@ -3,7 +3,7 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { updateCompleted } from '@/lib/utils';
 import { Task } from '@/types/task';
 import { Head, Link } from '@inertiajs/vue3';
-import { Loader2, PlusCircle } from 'lucide-vue-next';
+import { Loader2 } from 'lucide-vue-next';
 
 defineProps<{
     tasks: Task[];
@@ -15,14 +15,6 @@ defineProps<{
 
     <AppLayout>
         <div class="flex items-center justify-end gap-x-4 p-2">
-            <Link href="/tasks/create" class="hover:text-blue-500 hover:underline">
-                <div class="flex flex-row space-x-1">
-                    <div>
-                        <PlusCircle />
-                    </div>
-                    <div>Create</div>
-                </div>
-            </Link>
             <Link href="/tasks" class="hover:text-blue-500 hover:underline">
                 <div class="flex flex-row space-x-1">
                     <div>
