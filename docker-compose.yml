@@ -1,0 +1,13 @@
+services:
+    app:
+        container_name: lara-tasks
+        image: levenrok/lara-tasks:latest
+        build:
+            context: .
+            target: php
+            args:
+                - APP_ENV=${APP_ENV}
+        environment:
+            - APP_ENV=${APP_ENV}
+        ports:
+            - 8080:8080
